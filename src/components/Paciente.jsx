@@ -4,13 +4,29 @@ const Paciente = ({ paciente }) => {
   const { setEdicion } = usePacientes();
   const { email, fecha, nombre, propietario, sintomas, _id } = paciente;
 
-  const formatearFecha = (fecha) => {
-    const nuevaFecha = new Date(fecha);
-    return new Intl.DateTimeFormat('es-MX', { dateStyle: 'long' }).format(
-      nuevaFecha
-    );
-  };
+  //   const formatearFecha = (fecha) => {
+  //     console.log(fecha);
+  //     const nuevaFecha = new Date(fecha);
+  //     return new Intl.DateTimeFormat('es-MX', { dateStyle: 'long' }).format(
+  //       nuevaFecha
+  //     );
+  //   };
 
+  // formatear fecha
+  const formatearFecha = (fecha) => {
+    let nuevaFecha;
+    if (fecha.includes('T00:00:00.000Z')) {
+      nuevaFecha = new Date(fecha.split('T')[0].split('-'));
+    } else {
+      nuevaFecha = new Date(fecha);
+    }
+    const opciones = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+    return nuevaFecha.toLocaleDateString('es-ES', opciones);
+  };
   return (
     <div className='mx-5 my-10 bg-white shadow-md px-5 py-10 rounded-xl'>
       <p className='font-bold uppercase text-indigo-700 my-2'>

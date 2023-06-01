@@ -32,25 +32,30 @@ export const PacientesProvider = ({ children }) => {
 
   const guardarPaciente = async (paciente) => {
     if (paciente.id) {
-      console.log('ed');
+      console.log(paciente);
     } else {
-      console.log('nue');
-    }
-    return;
-    try {
-      const token = localStorage.getItem('token');
-      const config = {
-        headers: {
-          'Contet-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const { data } = await clienteAxios.post('/pacientes', paciente, config);
+      try {
+        const token = localStorage.getItem('token');
+        const config = {
+          headers: {
+            'Contet-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        // paciente.fecha = new Date(paciente.fecha).toISOString().slice(0, -1);
+        paciente.fecha = new Date(paciente.fecha).toISOString();
 
-      const { createdAt, updatedAt, __v, ...pacienteAlmacenado } = data;
-      setPacientes([pacienteAlmacenado, pacientes]);
-    } catch (error) {
-      console.log(error.response.data.msg);
+        const { data } = await clienteAxios.post(
+          '/pacientes',
+          paciente,
+          config
+        );
+
+        const { createdAt, updatedAt, __v, ...pacienteAlmacenado } = data;
+        setPacientes([pacienteAlmacenado, ...pacientes]);
+      } catch (error) {
+        console.log(error.response.data.msg);
+      }
     }
   };
 
