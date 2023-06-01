@@ -10,8 +10,6 @@ const RutaProtegida = () => {
 
   return (
     <>
-      <h1>RutaProtegida</h1>
-
       <Header />
       {auth?._id ? <Outlet /> : <Navigate to='/' />}
       <Footer />
