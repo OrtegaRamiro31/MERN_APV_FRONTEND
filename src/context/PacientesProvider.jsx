@@ -31,17 +31,30 @@ export const PacientesProvider = ({ children }) => {
   }, []);
 
   const guardarPaciente = async (paciente) => {
+    const token = localStorage.getItem('token');
+    const config = {
+      headers: {
+        'Contet-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
     if (paciente.id) {
-      console.log(paciente);
+      try {
+        const { data } = await clienteAxios.put(
+          `/pacientes/${paciente.id}`,
+          paciente,
+          config
+        );
+
+        const pacientesActualizado = pacientes.map((pacienteState) =>
+          pacienteState._id === data._id ? data : pacienteState
+        );
+        setPacientes(pacientesActualizado);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       try {
-        const token = localStorage.getItem('token');
-        const config = {
-          headers: {
-            'Contet-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        };
         // paciente.fecha = new Date(paciente.fecha).toISOString().slice(0, -1);
         paciente.fecha = new Date(paciente.fecha).toISOString();
 

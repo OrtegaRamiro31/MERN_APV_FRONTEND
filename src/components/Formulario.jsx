@@ -19,7 +19,8 @@ const Formulario = () => {
       setNombre(paciente.nombre);
       setPropietario(paciente.propietario);
       setEmail(paciente.email);
-      setFecha(paciente.fecha);
+      setFecha(paciente.fecha.split('T')[0]);
+      // setFecha(paciente.fecha);
       setSintomas(paciente.sintomas);
       setId(paciente._id);
     }
@@ -38,8 +39,26 @@ const Formulario = () => {
       return;
     }
 
-    setAlerta({});
     guardarPaciente({ nombre, propietario, email, fecha, sintomas, id });
+    setAlerta({ msg: 'Guardaro Correctamente' });
+    setNombre('');
+    setPropietario('');
+    setEmail('');
+    setFecha('');
+    setSintomas('');
+    setId(null);
+  };
+
+  console.log(fecha);
+  const formatoFecha = (fecha) => {
+    console.log(fecha);
+    const fechaFormateada = new Date(fecha);
+
+    const mes = fechaFormateada.getMonth() + 1; // Los meses en JavaScript son indexados desde 0
+    const dia = fechaFormateada.getDate();
+    const año = fechaFormateada.getFullYear();
+
+    return `${mes}/${dia}/${año}`;
   };
 
   const { msg } = alerta;
