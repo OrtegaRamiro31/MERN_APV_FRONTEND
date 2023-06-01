@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AuthLayout from './layout/AuthLayout';
-import Login from './layout/paginas/Login';
-import Registrar from './layout/paginas/Registrar';
-import OlvidePassword from './layout/paginas/OlvidePassword';
-import ConfirmarCuenta from './layout/paginas/ConfirmarCuenta';
-import NuevoPassword from './layout/paginas/NuevoPassword';
+import Login from './paginas/Login';
+import Registrar from './paginas/Registrar';
+import OlvidePassword from './paginas/OlvidePassword';
+import ConfirmarCuenta from './paginas/ConfirmarCuenta';
+import NuevoPassword from './paginas/NuevoPassword';
 import { AuthProvider } from './context/AuthProvider';
 
 function App() {
