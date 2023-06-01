@@ -49,18 +49,6 @@ const Formulario = () => {
     setId(null);
   };
 
-  console.log(fecha);
-  const formatoFecha = (fecha) => {
-    console.log(fecha);
-    const fechaFormateada = new Date(fecha);
-
-    const mes = fechaFormateada.getMonth() + 1; // Los meses en JavaScript son indexados desde 0
-    const dia = fechaFormateada.getDate();
-    const año = fechaFormateada.getFullYear();
-
-    return `${mes}/${dia}/${año}`;
-  };
-
   const { msg } = alerta;
 
   return (
